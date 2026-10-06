@@ -1,0 +1,194 @@
+:root {
+  --font-display: "Space Grotesk", sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+button,
+input,
+textarea,
+select { font: inherit; }
+
+.digi-tales-stage {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000;
+}
+
+.digi-tales-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.16), transparent 52%, rgba(0, 0, 0, 0.14));
+  pointer-events: none;
+}
+
+.yayoi-point-canvas {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 1s;
+}
+
+.yayoi-point-canvas--active {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.yayoi-point-canvas__surface {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.experimental-yayoi-quotes {
+  position: absolute;
+  z-index: 4;
+  right: clamp(1.25rem, 3vw, 3rem);
+  bottom: clamp(1.35rem, 3svh, 2.4rem);
+  width: min(34vw, 34rem);
+  min-height: 9rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.55s;
+}
+
+.experimental-yayoi-quotes--active {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.experimental-yayoi-quotes::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -2.75rem -1.5rem -2.5rem -4rem;
+  background: radial-gradient(ellipse at 84% 44%, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.64) 42%, rgba(0, 0, 0, 0.28) 66%, transparent 82%);
+}
+
+.experimental-yayoi-quotes__content {
+  position: relative;
+  margin: 0;
+  padding: 0.15rem 1.2rem 0.35rem 0;
+  text-align: right;
+  will-change: opacity, transform, filter;
+  animation: experimental-yayoi-quote-cycle var(--yayoi-quote-duration) cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.experimental-yayoi-quotes__accent {
+  position: absolute;
+  top: 0.42rem;
+  right: 0;
+  width: 2px;
+  height: clamp(2.8rem, 6.5svh, 4.6rem);
+  border-radius: 999px;
+  background: linear-gradient(to bottom, rgba(91, 235, 255, 0.94), rgba(255, 226, 79, 0.84) 52%, rgba(255, 70, 194, 0.92));
+  box-shadow: 0 0 3px rgba(91, 235, 255, 0.46), 0 0 7px rgba(255, 70, 194, 0.24);
+}
+
+.experimental-yayoi-quotes__japanese {
+  max-width: 18em;
+  margin: 0 0 0 auto;
+  color: rgba(255, 248, 229, 0.97);
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Noto Serif JP", serif;
+  font-size: clamp(1.25rem, 1.85vw, 2rem);
+  font-weight: 500;
+  line-height: 1.42;
+  letter-spacing: 0.075em;
+  text-wrap: balance;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.98), -0.5px 0 0 rgba(66, 220, 255, 0.34), 0.5px 0 0 rgba(255, 70, 194, 0.28);
+  animation: experimental-yayoi-quote-line-in 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+.experimental-yayoi-quotes__spanish {
+  max-width: 42ch;
+  margin: 0.72rem 0 0 auto;
+  color: rgba(226, 211, 180, 0.66);
+  font-family: var(--font-display);
+  font-size: clamp(0.72rem, 0.88vw, 0.92rem);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: 0.025em;
+  text-wrap: balance;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.98);
+  animation: experimental-yayoi-quote-line-in 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+}
+
+.digi-tales-mark {
+  position: absolute;
+  z-index: 4;
+  top: clamp(1rem, 2vw, 2rem);
+  left: clamp(1rem, 2vw, 2rem);
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+}
+
+.digi-tales-mark strong { font-size: clamp(0.8rem, 1.2vw, 1rem); }
+.digi-tales-mark span { color: #ffdc4a; font-size: clamp(0.62rem, 0.9vw, 0.8rem); }
+
+@keyframes experimental-yayoi-quote-cycle {
+  0% { opacity: 0; filter: blur(2px); transform: translateY(6px); }
+  7%, 84% { opacity: 1; filter: blur(0); transform: translateY(0); }
+  100% { opacity: 0; filter: blur(1.5px); transform: translateY(-4px); }
+}
+
+@keyframes experimental-yayoi-quote-line-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 767px) {
+  .experimental-yayoi-quotes {
+    right: 0.9rem;
+    bottom: clamp(1.5rem, 5svh, 3rem);
+    left: 0.9rem;
+    width: auto;
+    min-height: 7.5rem;
+  }
+
+  .experimental-yayoi-quotes::before { inset: -2rem -0.75rem -2rem -2.5rem; }
+  .experimental-yayoi-quotes__content { padding-right: 0.9rem; }
+  .experimental-yayoi-quotes__japanese { max-width: 22em; font-size: clamp(1.05rem, 5vw, 1.42rem); line-height: 1.48; }
+  .experimental-yayoi-quotes__spanish { max-width: 38ch; margin-top: 0.55rem; font-size: clamp(0.68rem, 3vw, 0.82rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yayoi-point-canvas,
+  .experimental-yayoi-quotes { transition: none; }
+
+  .experimental-yayoi-quotes__content,
+  .experimental-yayoi-quotes__japanese,
+  .experimental-yayoi-quotes__spanish {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+*.log
+*.tsbuildinfo
+.DS_Store
+
+# Secuencias intermedias regenerables desde los videos fuente
+tools/video-frame-matte/input/*/frames/
+tools/video-frame-matte/input/*/source-frames/
+tools/video-frame-matte/input/*/transparent-frames/
+
+# Capturas locales de validación visual
+*-preview.png
